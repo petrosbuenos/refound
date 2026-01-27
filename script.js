@@ -245,76 +245,24 @@ faqQuestions.forEach(question => {
 // Модалки
 // ============================================
 
-// Чат bubble з випадаючим меню
-const chatBubble = document.getElementById('chatBubble');
-const chatDropdown = document.getElementById('chatDropdown');
-const chatOnSite = document.getElementById('chatOnSite');
-const chatModal = document.getElementById('chatModal');
-const chatModalClose = document.getElementById('chatModalClose');
-
-function toggleChatDropdown() {
-    if (chatDropdown && chatBubble) {
-        const isExpanded = chatBubble.getAttribute('aria-expanded') === 'true';
-        chatBubble.setAttribute('aria-expanded', !isExpanded);
-        chatDropdown.classList.toggle('active', !isExpanded);
+// Функція для відкриття Jivo чату
+function openJivoChat() {
+    if (typeof jivo_api !== 'undefined') {
+        jivo_api.open();
+    } else {
+        // Якщо Jivo ще не завантажився, чекаємо
+        const checkJivo = setInterval(() => {
+            if (typeof jivo_api !== 'undefined') {
+                jivo_api.open();
+                clearInterval(checkJivo);
+            }
+        }, 100);
+        
+        // Таймаут на випадок, якщо Jivo не завантажиться
+        setTimeout(() => {
+            clearInterval(checkJivo);
+        }, 5000);
     }
-}
-
-function closeChatDropdown() {
-    if (chatDropdown && chatBubble) {
-        chatBubble.setAttribute('aria-expanded', 'false');
-        chatDropdown.classList.remove('active');
-    }
-}
-
-function openChatModal() {
-    if (chatModal) {
-        chatModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-        closeChatDropdown();
-    }
-}
-
-function closeChatModal() {
-    if (chatModal) {
-        chatModal.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-}
-
-if (chatBubble) {
-    chatBubble.addEventListener('click', (e) => {
-        e.stopPropagation();
-        toggleChatDropdown();
-    });
-}
-
-if (chatOnSite) {
-    chatOnSite.addEventListener('click', (e) => {
-        e.preventDefault();
-        openChatModal();
-    });
-}
-
-// Закриваємо dropdown при кліку поза ним
-document.addEventListener('click', (e) => {
-    if (chatDropdown && chatBubble) {
-        if (!chatBubble.contains(e.target) && !chatDropdown.contains(e.target)) {
-            closeChatDropdown();
-        }
-    }
-});
-
-if (chatModalClose) {
-    chatModalClose.addEventListener('click', closeChatModal);
-}
-
-if (chatModal) {
-    chatModal.addEventListener('click', (e) => {
-        if (e.target === chatModal || e.target.classList.contains('modal__overlay')) {
-            closeChatModal();
-        }
-    });
 }
 
 // Відео відтворення на картці
@@ -355,7 +303,6 @@ videoReviewCards.forEach(card => {
 // ESC для закриття модалок
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-        closeChatModal();
         closePopup();
     }
 });
@@ -476,8 +423,7 @@ if (document.readyState === 'loading') {
 // ============================================
 
 const heroForm = document.getElementById('heroForm');
-const chatForm = document.getElementById('chatForm');
-const forms = [heroForm, popupForm, chatForm].filter(Boolean);
+const forms = [heroForm, popupForm].filter(Boolean);
 
 forms.forEach(form => {
     form?.addEventListener('submit', (e) => {
@@ -495,11 +441,6 @@ forms.forEach(form => {
         // Закриваємо попап якщо це форма в попапі
         if (form === popupForm) {
             closePopup();
-        }
-        
-        // Закриваємо модалку чату якщо це форма чату
-        if (form === chatForm) {
-            closeChatModal();
         }
         
         // Очищаємо форму
@@ -535,11 +476,7 @@ if (heroCtaPrimary) {
 
 if (heroCtaSecondary) {
     heroCtaSecondary.addEventListener('click', () => {
-        if (chatModal) {
-            openChatModal();
-        } else {
-            scrollToContacts();
-        }
+        openJivoChat();
     });
 }
 
