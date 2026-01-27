@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Опора Права - профессиональное возвращение средств. Работаем по закону, без предоплаты.">
+    <title>Возврат средств | Опора Права</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://mapgl.2gis.com/api/js/v1"></script>
+</head>
+<body>
+    <!-- Шапка -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header__content">
+                <div class="header__logo">
+                    <img src="img/logo.png" alt="Опора Права" width="300" height="200" loading="eager">
+                </div>
+                
+                <nav class="nav" id="nav">
+                    <ul class="nav__list">
+                        <li><a href="#main" class="nav__link">Главная</a></li>
+                        <li><a href="#services" class="nav__link">Услуги</a></li>
+                        <li><a href="#team" class="nav__link">Наша команда</a></li>
+                        <li><a href="#stages" class="nav__link">Этапы возврата</a></li>
+                        <li><a href="#reviews" class="nav__link">Отзывы</a></li>
+                        <li><a href="#faq" class="nav__link">FAQ</a></li>
+                        <li><a href="#contacts" class="nav__link">Контакты</a></li>
+                    </ul>
+                </nav>
+                
+                <button class="btn btn--primary header__cta" id="headerCta">Получить консультацию</button>
+                
+                <button class="burger" id="burger" aria-label="Открыть меню">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Главная секция -->
+    <main id="main">
+        <!-- Главное изображение на весь экран -->
+        <div class="hero__image-fullscreen fade-in" id="heroImage">
+            <img src="img/main.png" alt="Опора Права" loading="eager" id="heroImageImg">
+        </div>
+        
+        <section class="hero">
+            <div class="container">
+                
+                <div class="hero__content">
+                    <div class="hero__text fade-in">
+                        <h1 class="hero__title fade-in">Вернем ваши средства законным путем</h1>
+                        <p class="hero__subtitle fade-in">Работаем по закону. Без предоплаты. Оплата возможна по результату.</p>
+                        <div class="hero__actions fade-in">
+                            <button class="btn btn--primary btn--large" id="heroCtaPrimary">Запустить процесс</button>
+                            <button class="btn btn--secondary btn--large" id="heroCtaSecondary">Задать вопрос</button>
+                        </div>
+                        <div class="hero__trust fade-in">
+                            <div class="trust-badge">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M10 2L12.5 7.5L18 9L12.5 10.5L10 16L7.5 10.5L2 9L7.5 7.5L10 2Z"/>
+                                </svg>
+                                <span>Без предоплаты</span>
+                            </div>
+                            <div class="trust-badge">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M10 2L3 7v6c0 4.418 3.582 8 7 8s7-3.582 7-8V7l-7-5z"/>
+                                </svg>
+                                <span>Юридическое сопровождение</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="hero__form-wrapper fade-in">
+                        <form class="form hero__form" id="heroForm">
+                            <h3 class="form__title">Оставьте заявку</h3>
+                            <div class="form__group">
+                                <input type="text" class="form__input" placeholder="Имя" required aria-label="Ваше имя">
+                            </div>
+                            <div class="form__group">
+                                <input type="tel" class="form__input" placeholder="Телефон" required aria-label="Ваш телефон">
+                            </div>
+                            <div class="form__group">
+                                <input type="email" class="form__input" placeholder="Email" required aria-label="Ваш email">
+                            </div>
+                            <div class="form__group">
+                                <label class="form__checkbox">
+                                    <input type="checkbox" required>
+                                    <span>Согласен с <a href="#privacy" class="form__link">политикой конфиденциальности</a></span>
+                                </label>
+                            </div>
+                            <button type="submit" class="btn btn--primary btn--block">Отправить</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Преимущества -->
+        <section class="advantages-section">
+            <div class="container">
+                <div class="advantages">
+                    <div class="advantage-card advantage-card--nopaid fade-in">
+                        <h3 class="advantage-card__title">Без предоплаты</h3>
+                        <p class="advantage-card__text">Оплата только по результату работы. Вы не рискуете своими средствами — мы получаем вознаграждение только после успешного возврата ваших денег. Это гарантирует, что мы заинтересованы в положительном исходе вашего дела и приложим максимум усилий для достижения результата.</p>
+                    </div>
+                    <div class="advantage-card advantage-card--contract fade-in">
+                        <h3 class="advantage-card__title">Прозрачный договор</h3>
+                        <p class="advantage-card__text">Все условия прописаны четко и понятно. В договоре указаны все этапы работы, сроки, размер вознаграждения и порядок оплаты. Никаких скрытых условий или дополнительных платежей. Вы всегда знаете, на каком этапе находится ваше дело и что происходит с вашими средствами.</p>
+                    </div>
+                    <div class="advantage-card advantage-card--support fade-in">
+                        <h3 class="advantage-card__title">Сопровождение на всех этапах</h3>
+                        <p class="advantage-card__text">Поддержка от начала до конца процесса. Мы сопровождаем ваш кейс на всех этапах: от первичного анализа до получения средств на ваш счет. Наши юристы ведут переговоры, готовят документы, взаимодействуют с банками и регуляторами, информируя вас о каждом шаге.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Услуги -->
+        <section class="services" id="services">
+            <div class="container">
+                <h2 class="section__title fade-in">С какими кейсами работаем</h2>
+                <div class="services__grid">
+                    <div class="service-card fade-in">
+                        <div class="service-card__icon">
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="20" cy="20" r="8"/>
+                                <path d="M20 12v8l6 4"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-card__title">Псевдонаучные/оккультные услуги</h3>
+                        <p class="service-card__text">Оказание псевдонаучных/оккультных услуг под видом консультационной помощи</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-card__icon">
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="10" y="12" width="20" height="16" rx="2"/>
+                                <path d="M15 12v-2a5 5 0 0 1 10 0v2"/>
+                                <circle cx="20" cy="22" r="2"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-card__title">БАДы с введением в заблуждение</h3>
+                        <p class="service-card__text">Реализация биологически активных добавок с введением потребителя в заблуждение</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-card__icon">
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="8" y="8" width="24" height="24" rx="2"/>
+                                <path d="M12 16h16M12 20h12M12 24h8"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-card__title">Инвестиционное и брокерское мошенничество</h3>
+                        <p class="service-card__text">Мошенничество под видом инвестиционной и брокерской деятельности</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-card__icon">
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="15" cy="15" r="4"/>
+                                <circle cx="25" cy="15" r="4"/>
+                                <path d="M10 25c0-2.5 2.5-5 5-5h10c2.5 0 5 2.5 5 5"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-card__title">Брачные/знакомственные агентства</h3>
+                        <p class="service-card__text">Мошенничество под предлогом брачного/знакомственного агентства</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-card__icon">
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M10 28V18a10 10 0 0 1 20 0v10"/>
+                                <rect x="8" y="28" width="24" height="8" rx="1"/>
+                                <path d="M18 28v-4h4v4"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-card__title">Посреднические услуги в недвижимости</h3>
+                        <p class="service-card__text">Недобросовестные посреднические услуги в сфере недвижимости</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-card__icon">
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 8L12 14v8c0 6.627 3.582 12 8 12s8-5.373 8-12v-8l-8-6z"/>
+                                <path d="M15 20l5 5 10-10"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-card__title">Оформление виз и миграционных документов</h3>
+                        <p class="service-card__text">Мошенничество при оказании услуг по оформлению виз и миграционных документов</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-card__icon">
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="8" y="12" width="24" height="20" rx="2"/>
+                                <path d="M12 12v-2a8 8 0 0 1 16 0v2"/>
+                                <path d="M16 20h8M16 24h6M16 28h4"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-card__title">Долевое строительство</h3>
+                        <p class="service-card__text">Введение в заблуждение при инвестировании в строящееся жильё (долевое строительство)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Команда -->
+        <section class="team" id="team">
+            <div class="container">
+                <h2 class="section__title fade-in">Наша команда</h2>
+                <div class="team__grid">
+                    <div class="team-card fade-in">
+                        <div class="team-card__avatar">
+                            <img src="img/loyer1.jpg" alt="Корчак Александр Петрович" class="team-card__photo">
+                        </div>
+                        <h3 class="team-card__name">Корчак Александр Петрович</h3>
+                        <p class="team-card__role">Юрист-консультант</p>
+                        <p class="team-card__specialty">Специализация: финансовое право, возврат средств от брокеров</p>
+                    </div>
+                    <div class="team-card fade-in">
+                        <div class="team-card__avatar">
+                            <img src="img/loyer2.jpg" alt="Мадранян Роман Давидович" class="team-card__photo">
+                        </div>
+                        <h3 class="team-card__name">Мадранян Роман Давидович</h3>
+                        <p class="team-card__role">Старший юрист</p>
+                        <p class="team-card__specialty">Специализация: криптовалютные споры, международное право</p>
+                    </div>
+                    <div class="team-card fade-in">
+                        <div class="team-card__avatar">
+                            <img src="img/loyer3.jpg" alt="Репникова Алена Викторовна" class="team-card__photo">
+                        </div>
+                        <h3 class="team-card__name">Репникова Алена Викторовна</h3>
+                        <p class="team-card__role">Юрист</p>
+                        <p class="team-card__specialty">Специализация: чарджбэк, работа с банками и платежными системами</p>
+                    </div>
+                    <div class="team-card fade-in">
+                        <div class="team-card__avatar">
+                            <img src="img/loyer4.jpg" alt="Гуляева София Владиславовна" class="team-card__photo">
+                        </div>
+                        <h3 class="team-card__name">Гуляева София Владиславовна</h3>
+                        <p class="team-card__role">Юрист-аналитик</p>
+                        <p class="team-card__specialty">Специализация: анализ кейсов, подготовка документов, комплаенс</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Этапы возврата -->
+        <section class="stages" id="stages">
+            <div class="container">
+                <h2 class="section__title fade-in">Этапы возврата</h2>
+                <div class="timeline">
+                    <div class="timeline__item fade-in">
+                        <div class="timeline__number">1</div>
+                        <div class="timeline__content">
+                            <h3 class="timeline__title">Анализ кейса</h3>
+                            <p class="timeline__text">Изучаем вашу ситуацию, оцениваем шансы на успех</p>
+                        </div>
+                    </div>
+                    <div class="timeline__item fade-in">
+                        <div class="timeline__number">2</div>
+                        <div class="timeline__content">
+                            <h3 class="timeline__title">Сбор доказательств</h3>
+                            <p class="timeline__text">Собираем необходимые документы и доказательства</p>
+                        </div>
+                    </div>
+                    <div class="timeline__item fade-in">
+                        <div class="timeline__number">3</div>
+                        <div class="timeline__content">
+                            <h3 class="timeline__title">Подготовка документов</h3>
+                            <p class="timeline__text">Формируем пакет документов для подачи</p>
+                        </div>
+                    </div>
+                    <div class="timeline__item fade-in">
+                        <div class="timeline__number">4</div>
+                        <div class="timeline__content">
+                            <h3 class="timeline__title">Подача</h3>
+                            <p class="timeline__text">Подаем документы в соответствующие инстанции</p>
+                        </div>
+                    </div>
+                    <div class="timeline__item fade-in">
+                        <div class="timeline__number">5</div>
+                        <div class="timeline__content">
+                            <h3 class="timeline__title">Коммуникации/комплаенс</h3>
+                            <p class="timeline__text">Ведем переговоры и взаимодействие с противоположной стороной</p>
+                        </div>
+                    </div>
+                    <div class="timeline__item fade-in">
+                        <div class="timeline__number">6</div>
+                        <div class="timeline__content">
+                            <h3 class="timeline__title">Решение</h3>
+                            <p class="timeline__text">Получаем решение по вашему делу</p>
+                        </div>
+                    </div>
+                    <div class="timeline__item fade-in">
+                        <div class="timeline__number">7</div>
+                        <div class="timeline__content">
+                            <h3 class="timeline__title">Возврат средств</h3>
+                            <p class="timeline__text">Организуем возврат средств на ваш счет</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Отзывы -->
+        <section class="reviews" id="reviews">
+            <div class="container">
+                <h2 class="section__title fade-in">Отзывы клиентов</h2>
+                
+                <div class="reviews__content">
+                    <!-- Карусель з відео (зліва) -->
+                    <div class="reviews__video-carousel">
+                        <div class="video-carousel__container">
+                            <button class="video-carousel__arrow video-carousel__arrow--prev" id="videoPrev" aria-label="Предыдущее видео">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M15 18l-6-6 6-6"/>
+                                </svg>
+                            </button>
+                            
+                            <div class="video-carousel__track" id="videoTrack">
+                                <div class="video-carousel__slide">
+                                    <div class="video-review-card fade-in" data-video-id="1">
+                                        <div class="video-review-card__preview">
+                                            <video class="video-review-card__preview-video" controls playsinline>
+                                                <source src="img/VID_20260127_113716.mp4" type="video/mp4">
+                                            </video>
+                                            <div class="video-review-card__play">
+                                                <svg width="48" height="48" viewBox="0 0 48 48" fill="white">
+                                                    <circle cx="24" cy="24" r="24" fill="rgba(0,0,0,0.6)"/>
+                                                    <path d="M18 14l12 10-12 10z" fill="white"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <p class="video-review-card__name">Отзыв клиента</p>
+                                    </div>
+                                </div>
+                                <div class="video-carousel__slide">
+                                    <div class="video-review-card fade-in" data-video-id="2">
+                                        <div class="video-review-card__preview">
+                                            <div class="video-review-card__play">
+                                                <svg width="48" height="48" viewBox="0 0 48 48" fill="white">
+                                                    <circle cx="24" cy="24" r="24" fill="rgba(0,0,0,0.6)"/>
+                                                    <path d="M18 14l12 10-12 10z" fill="white"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <p class="video-review-card__name">История успеха</p>
+                                    </div>
+                                </div>
+                                <div class="video-carousel__slide">
+                                    <div class="video-review-card fade-in" data-video-id="3">
+                                        <div class="video-review-card__preview">
+                                            <div class="video-review-card__play">
+                                                <svg width="48" height="48" viewBox="0 0 48 48" fill="white">
+                                                    <circle cx="24" cy="24" r="24" fill="rgba(0,0,0,0.6)"/>
+                                                    <path d="M18 14l12 10-12 10z" fill="white"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <p class="video-review-card__name">Результат работы</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button class="video-carousel__arrow video-carousel__arrow--next" id="videoNext" aria-label="Следующее видео">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 18l6-6-6-6"/>
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        <div class="video-carousel__dots" id="videoDots"></div>
+                    </div>
+                    
+                    <!-- Текстові відгуки (справа) -->
+                    <div class="reviews__text-list">
+                        <div class="text-reviews__container">
+                            <div class="review-card fade-in">
+                                <div class="review-card__stars">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="#fbbf24"><path d="M10 0l2.4 7.3h7.6l-6.2 4.5 2.4 7.3L10 14.6l-6.2 4.5 2.4-7.3L0 7.3h7.6z"/></svg>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="#fbbf24"><path d="M10 0l2.4 7.3h7.6l-6.2 4.5 2.4 7.3L10 14.6l-6.2 4.5 2.4-7.3L0 7.3h7.6z"/></svg>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="#fbbf24"><path d="M10 0l2.4 7.3h7.6l-6.2 4.5 2.4 7.3L10 14.6l-6.2 4.5 2.4-7.3L0 7.3h7.6z"/></svg>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="#fbbf24"><path d="M10 0l2.4 7.3h7.6l-6.2 4.5 2.4 7.3L10 14.6l-6.2 4.5 2.4-7.3L0 7.3h7.6z"/></svg>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="#fbbf24"><path d="M10 0l2.4 7.3h7.6l-6.2 4.5 2.4 7.3L10 14.6l-6.2 4.5 2.4-7.3L0 7.3h7.6z"/></svg>
+                                </div>
+                                <p class="review-card__text">"Профессиональная работа, все этапы были прозрачны. Вернули средства в полном объеме. Рекомендую!"</p>
+                                <p class="review-card__author">Иван К.</p>
+                                <p class="review-card__location">Москва</p>
+                            </div>
+                            <div class="review-card fade-in">
+                                <div class="review-card__stars">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="#fbbf24"><path d="M10 0l2.4 7.3h7.6l-6.2 4.5 2.4 7.3L10 14.6l-6.2 4.5 2.4-7.3L0 7.3h7.6z"/></svg>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="#fbbf24"><path d="M10 0l2.4 7.3h7.6l-6.2 4.5 2.4 7.3L10 14.6l-6.2 4.5 2.4-7.3L0 7.3h7.6z"/></svg>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="#fbbf24"><path d="M10 0l2.4 7.3h7.6l-6.2 4.5 2.4 7.3L10 14.6l-6.2 4.5 2.4-7.3L0 7.3h7.6z"/></svg>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="#fbbf24"><path d="M10 0l2.4 7.3h7.6l-6.2 4.5 2.4 7.3L10 14.6l-6.2 4.5 2.4-7.3L0 7.3h7.6z"/></svg>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="#fbbf24"><path d="M10 0l2.4 7.3h7.6l-6.2 4.5 2.4 7.3L10 14.6l-6.2 4.5 2.4-7.3L0 7.3h7.6z"/></svg>
+                                </div>
+                                <p class="review-card__text">"Долго искал специалистов по возврату средств. Здесь все сделали быстро и качественно. Спасибо команде!"</p>
+                                <p class="review-card__author">Ольга М.</p>
+                                <p class="review-card__location">Санкт-Петербург</p>
+                            </div>
+                            <div class="review-card fade-in">
+                                <div class="review-card__stars">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="#fbbf24"><path d="M10 0l2.4 7.3h7.6l-6.2 4.5 2.4 7.3L10 14.6l-6.2 4.5 2.4-7.3L0 7.3h7.6z"/></svg>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="#fbbf24"><path d="M10 0l2.4 7.3h7.6l-6.2 4.5 2.4 7.3L10 14.6l-6.2 4.5 2.4-7.3L0 7.3h7.6z"/></svg>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="#fbbf24"><path d="M10 0l2.4 7.3h7.6l-6.2 4.5 2.4 7.3L10 14.6l-6.2 4.5 2.4-7.3L0 7.3h7.6z"/></svg>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="#fbbf24"><path d="M10 0l2.4 7.3h7.6l-6.2 4.5 2.4 7.3L10 14.6l-6.2 4.5 2.4-7.3L0 7.3h7.6z"/></svg>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="#fbbf24"><path d="M10 0l2.4 7.3h7.6l-6.2 4.5 2.4 7.3L10 14.6l-6.2 4.5 2.4-7.3L0 7.3h7.6z"/></svg>
+                                </div>
+                                <p class="review-card__text">"Честная оценка шансов с самого начала. Работали без предоплаты, что было важно. Результат превзошел ожидания."</p>
+                                <p class="review-card__author">Сергей В.</p>
+                                <p class="review-card__location">Екатеринбург</p>
+                            </div>
+                            <div class="review-card fade-in">
+                                <div class="review-card__stars">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="#fbbf24"><path d="M10 0l2.4 7.3h7.6l-6.2 4.5 2.4 7.3L10 14.6l-6.2 4.5 2.4-7.3L0 7.3h7.6z"/></svg>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="#fbbf24"><path d="M10 0l2.4 7.3h7.6l-6.2 4.5 2.4 7.3L10 14.6l-6.2 4.5 2.4-7.3L0 7.3h7.6z"/></svg>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="#fbbf24"><path d="M10 0l2.4 7.3h7.6l-6.2 4.5 2.4 7.3L10 14.6l-6.2 4.5 2.4-7.3L0 7.3h7.6z"/></svg>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="#fbbf24"><path d="M10 0l2.4 7.3h7.6l-6.2 4.5 2.4 7.3L10 14.6l-6.2 4.5 2.4-7.3L0 7.3h7.6z"/></svg>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="#fbbf24"><path d="M10 0l2.4 7.3h7.6l-6.2 4.5 2.4 7.3L10 14.6l-6.2 4.5 2.4-7.3L0 7.3h7.6z"/></svg>
+                                </div>
+                                <p class="review-card__text">"Отличная команда профессионалов. Помогли вернуть деньги от недобросовестного брокера. Все четко и по делу."</p>
+                                <p class="review-card__author">Мария С.</p>
+                                <p class="review-card__location">Новосибирск</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="faq" id="faq">
+            <div class="container">
+                <h2 class="section__title fade-in">Часто задаваемые вопросы</h2>
+                <div class="faq__list">
+                    <div class="faq__item fade-in">
+                        <button class="faq__question" aria-expanded="false" aria-controls="faq-answer-1">
+                            <span>Реально ли вернуть деньги у «брокера», если я сам пополнял счёт?</span>
+                            <svg class="faq__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M10 5v10M5 10h10" class="faq__icon-plus"/>
+                                <path d="M5 7.5l5 5 5-5" class="faq__icon-minus"/>
+                            </svg>
+                        </button>
+                        <div class="faq__answer" id="faq-answer-1">
+                            <p>Да, это возможно. Даже если вы самостоятельно пополняли счёт, это не означает, что мошеннические действия брокера становятся законными. Мы работаем через процедуры комплаенса, жалобы в регуляторы и, при необходимости, судебные разбирательства. Важно собрать доказательства обмана и нарушений со стороны брокера.</p>
+                        </div>
+                    </div>
+                    <div class="faq__item fade-in">
+                        <button class="faq__question" aria-expanded="false" aria-controls="faq-answer-2">
+                            <span>Что такое чарджбэк и подойдёт ли он мне?</span>
+                            <svg class="faq__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M10 5v10M5 10h10" class="faq__icon-plus"/>
+                                <path d="M5 7.5l5 5 5-5" class="faq__icon-minus"/>
+                            </svg>
+                        </button>
+                        <div class="faq__answer" id="faq-answer-2">
+                            <p>Чарджбэк — это процедура возврата средств через банк-эмитент карты при оплате картой. Подходит, если вы платили картой и прошло не более 120 дней (срок может отличаться). Мы оценим ваш случай и подскажем, применим ли чарджбэк. Если нет — используем другие механизмы возврата.</p>
+                        </div>
+                    </div>
+                    <div class="faq__item fade-in">
+                        <button class="faq__question" aria-expanded="false" aria-controls="faq-answer-3">
+                            <span>А если деньги ушли переводом на счёт/карту (APP-fraud)?</span>
+                            <svg class="faq__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M10 5v10M5 10h10" class="faq__icon-plus"/>
+                                <path d="M5 7.5l5 5 5-5" class="faq__icon-minus"/>
+                            </svg>
+                        </button>
+                        <div class="faq__answer" id="faq-answer-3">
+                            <p>APP-fraud (Authorized Push Payment fraud) — это случаи, когда вы сами авторизовали перевод, но были обмануты. Возврат возможен через процедуры комплаенса банков, жалобы в регуляторы и судебные разбирательства. Сложность выше, чем при чарджбэке, но шансы есть. Мы проанализируем ваш случай и выберем оптимальную стратегию.</p>
+                        </div>
+                    </div>
+                    <div class="faq__item fade-in">
+                        <button class="faq__question" aria-expanded="false" aria-controls="faq-answer-4">
+                            <span>Можно ли вернуть криптовалюту?</span>
+                            <svg class="faq__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M10 5v10M5 10h10" class="faq__icon-plus"/>
+                                <path d="M5 7.5l5 5 5-5" class="faq__icon-minus"/>
+                            </svg>
+                        </button>
+                        <div class="faq__answer" id="faq-answer-4">
+                            <p>Возврат криптовалюты сложнее, но возможен. Работаем через процедуры комплаенса криптобирж, жалобы в регуляторы, блокчейн-анализ и, при необходимости, судебные разбирательства. Важно иметь доказательства обмана и документы о переводах. Шансы зависят от конкретного случая и юрисдикции.</p>
+                        </div>
+                    </div>
+                    <div class="faq__item fade-in">
+                        <button class="faq__question" aria-expanded="false" aria-controls="faq-answer-5">
+                            <span>Сколько занимает процесс?</span>
+                            <svg class="faq__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M10 5v10M5 10h10" class="faq__icon-plus"/>
+                                <path d="M5 7.5l5 5 5-5" class="faq__icon-minus"/>
+                            </svg>
+                        </button>
+                        <div class="faq__answer" id="faq-answer-5">
+                            <p>Сроки зависят от сложности кейса и типа мошенничества. Простые случаи с чарджбэком — от 1 до 3 месяцев. Сложные кейсы (APP-fraud, криптовалюта, международные брокеры) — от 3 до 6 месяцев, иногда дольше. Мы информируем о прогрессе на каждом этапе.</p>
+                        </div>
+                    </div>
+                    <div class="faq__item fade-in">
+                        <button class="faq__question" aria-expanded="false" aria-controls="faq-answer-6">
+                            <span>Нужны ли оригиналы документов?</span>
+                            <svg class="faq__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M10 5v10M5 10h10" class="faq__icon-plus"/>
+                                <path d="M5 7.5l5 5 5-5" class="faq__icon-minus"/>
+                            </svg>
+                        </button>
+                        <div class="faq__answer" id="faq-answer-6">
+                            <p>В большинстве случаев достаточно качественных копий (скриншоты, PDF, фото). Оригиналы могут понадобиться на этапе судебных разбирательств или при работе с некоторыми регуляторами. Мы уточним, какие документы нужны именно для вашего случая.</p>
+                        </div>
+                    </div>
+                    <div class="faq__item fade-in">
+                        <button class="faq__question" aria-expanded="false" aria-controls="faq-answer-7">
+                            <span>Вы работаете с кейсами РФ и РК?</span>
+                            <svg class="faq__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M10 5v10M5 10h10" class="faq__icon-plus"/>
+                                <path d="M5 7.5l5 5 5-5" class="faq__icon-minus"/>
+                            </svg>
+                        </button>
+                        <div class="faq__answer" id="faq-answer-7">
+                            <p>Да, мы работаем с кейсами из России и Казахстана. Имеем опыт взаимодействия с банками, регуляторами и судебными системами этих стран. Также работаем с международными случаями, когда мошенники находятся за рубежом.</p>
+                        </div>
+                    </div>
+                    <div class="faq__item fade-in">
+                        <button class="faq__question" aria-expanded="false" aria-controls="faq-answer-8">
+                            <span>Сколько это стоит?</span>
+                            <svg class="faq__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M10 5v10M5 10h10" class="faq__icon-plus"/>
+                                <path d="M5 7.5l5 5 5-5" class="faq__icon-minus"/>
+                            </svg>
+                        </button>
+                        <div class="faq__answer" id="faq-answer-8">
+                            <p>Мы работаем без предоплаты. Оплата происходит только после успешного возврата средств. Стоимость зависит от сложности кейса и суммы — обычно это процент от возвращённой суммы или фиксированная сумма по договорённости. Точную стоимость обсудим после анализа вашего случая.</p>
+                        </div>
+                    </div>
+                    <div class="faq__item fade-in">
+                        <button class="faq__question" aria-expanded="false" aria-controls="faq-answer-9">
+                            <span>Банк уже отказал. Есть смысл повторно?</span>
+                            <svg class="faq__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M10 5v10M5 10h10" class="faq__icon-plus"/>
+                                <path d="M5 7.5l5 5 5-5" class="faq__icon-minus"/>
+                            </svg>
+                        </button>
+                        <div class="faq__answer" id="faq-answer-9">
+                            <p>Да, есть смысл. Отказ банка на первом этапе — не окончательное решение. Мы можем обжаловать отказ через процедуры комплаенса, подать жалобу в регуляторы (ЦБ РФ, АФН РК и др.), использовать альтернативные механизмы возврата или обратиться в суд. Многое зависит от причин отказа и наличия доказательств обмана.</p>
+                        </div>
+                    </div>
+                    <div class="faq__item fade-in">
+                        <button class="faq__question" aria-expanded="false" aria-controls="faq-answer-10">
+                            <span>Гарантируете возврат?</span>
+                            <svg class="faq__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M10 5v10M5 10h10" class="faq__icon-plus"/>
+                                <path d="M5 7.5l5 5 5-5" class="faq__icon-minus"/>
+                            </svg>
+                        </button>
+                        <div class="faq__answer" id="faq-answer-10">
+                            <p>Нет, юридически гарантировать возврат средств нельзя — это было бы нечестно. Мы даём честную оценку шансов на успех на основе анализа вашего кейса, документов и опыта работы с подобными случаями. Работаем по установленной процедуре и используем все доступные механизмы. Оплата только по результату снижает ваши риски.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Контакты -->
+        <section class="contacts" id="contacts">
+            <div class="container">
+                <h2 class="section__title fade-in">Контакты</h2>
+                <div class="contacts__content">
+                    <div class="contacts__info fade-in">
+                        <div class="contact-item">
+                            <h3 class="contact-item__label">Адрес</h3>
+                            <p class="contact-item__value">г. Москва, ул. Примерная, д. 1, офис 100</p>
+                        </div>
+                        <div class="contact-item">
+                            <h3 class="contact-item__label">Email</h3>
+                            <p class="contact-item__value"><a href="mailto:info@refound.ru">info@refound.ru</a></p>
+                        </div>
+                        <div class="contact-item">
+                            <h3 class="contact-item__label">Телефон</h3>
+                            <p class="contact-item__value"><a href="tel:+79991234567">+7 (999) 123-45-67</a></p>
+                        </div>
+                        <div class="contact-item">
+                            <h3 class="contact-item__label">Часы работы</h3>
+                            <p class="contact-item__value">Пн-Пт: 9:00 - 18:00<br>Сб-Вс: выходной</p>
+                        </div>
+                    </div>
+                    <div class="contacts__map fade-in">
+                        <div class="map-container">
+                            <div id="map"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__section">
+                    <h3 class="footer__title">О компании</h3>
+                    <p class="footer__text">Мы специализируемся на возврате средств законным путем. Работаем прозрачно, без предоплаты, с полным сопровождением на всех этапах процесса.</p>
+                </div>
+                <div class="footer__section">
+                    <h3 class="footer__title">Навигация</h3>
+                    <ul class="footer__list">
+                        <li><a href="#main" class="footer__link">Главная</a></li>
+                        <li><a href="#services" class="footer__link">Услуги</a></li>
+                        <li><a href="#team" class="footer__link">Наша команда</a></li>
+                        <li><a href="#stages" class="footer__link">Этапы возврата</a></li>
+                        <li><a href="#reviews" class="footer__link">Отзывы</a></li>
+                        <li><a href="#faq" class="footer__link">FAQ</a></li>
+                        <li><a href="#contacts" class="footer__link">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="footer__section">
+                    <h3 class="footer__title">Контакты</h3>
+                    <ul class="footer__list">
+                        <li>г. Москва, ул. Примерная, д. 1</li>
+                        <li><a href="mailto:info@refound.ru" class="footer__link">info@refound.ru</a></li>
+                        <li><a href="tel:+79991234567" class="footer__link">+7 (999) 123-45-67</a></li>
+                    </ul>
+                </div>
+                <div class="footer__section">
+                    <h3 class="footer__title">Правовая информация</h3>
+                    <ul class="footer__list">
+                        <li><a href="#privacy" class="footer__link">Политика конфиденциальности</a></li>
+                        <li><a href="#terms" class="footer__link">Пользовательское соглашение</a></li>
+                        <li><a href="#disclaimer" class="footer__link">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p class="footer__copyright">&copy; 2026 Опора Права. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating чат bubble з випадаючим меню -->
+    <div class="chat-bubble-wrapper">
+        <button class="chat-bubble" id="chatBubble" aria-label="Открыть меню чата" aria-expanded="false">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+        </button>
+        <div class="chat-dropdown" id="chatDropdown">
+            <button class="chat-dropdown__item" id="chatOnSite">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+                <span>Чат на сайте</span>
+            </button>
+            <a href="https://t.me/refound" class="chat-dropdown__item" target="_blank" rel="noopener" id="chatTelegram">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.193l-1.87 8.81c-.14.625-.5.78-1.016.485l-2.81-2.07-1.355 1.3c-.15.15-.277.277-.568.277l.2-2.83 5.2-4.7c.227-.2-.05-.31-.35-.11l-6.42 4.05-2.76-.86c-.6-.19-.61-.6.12-.9l10.75-4.15c.5-.18.94.11.78.69z"/>
+                </svg>
+                <span>Telegram</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Модалка чата -->
+    <div class="modal" id="chatModal">
+        <div class="modal__overlay"></div>
+        <div class="modal__content modal__content--chat">
+            <button class="modal__close" id="chatModalClose" aria-label="Закрыть">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+            <h3 class="modal__title">Чат на сайте</h3>
+            <p class="modal__text">Оставьте ваше сообщение, и мы свяжемся с вами в ближайшее время.</p>
+            <form class="form" id="chatForm">
+                <div class="form__group">
+                    <input type="text" class="form__input" placeholder="Ваше имя" required aria-label="Ваше имя">
+                </div>
+                <div class="form__group">
+                    <input type="email" class="form__input" placeholder="Email" required aria-label="Ваш email">
+                </div>
+                <div class="form__group">
+                    <textarea class="form__input" rows="4" placeholder="Ваше сообщение" required aria-label="Ваше сообщение"></textarea>
+                </div>
+                <div class="form__group">
+                    <label class="form__checkbox">
+                        <input type="checkbox" required>
+                        <span>Согласен с <a href="#privacy" class="form__link">политикой конфиденциальности</a></span>
+                    </label>
+                </div>
+                <button type="submit" class="btn btn--primary btn--block">Отправить</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Модалка видео -->
+    <!-- Попап форма -->
+    <div class="popup" id="popup">
+        <div class="popup__overlay"></div>
+        <div class="popup__content">
+            <button class="popup__close" id="popupClose" aria-label="Закрыть">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+            <h3 class="popup__title">Получите бесплатную консультацию</h3>
+            <form class="form" id="popupForm">
+                <div class="form__group">
+                    <input type="text" class="form__input" placeholder="Имя" required aria-label="Ваше имя">
+                </div>
+                <div class="form__group">
+                    <input type="tel" class="form__input" placeholder="Телефон" required aria-label="Ваш телефон">
+                </div>
+                <div class="form__group">
+                    <input type="email" class="form__input" placeholder="Email" required aria-label="Ваш email">
+                </div>
+                <div class="form__group">
+                    <label class="form__checkbox">
+                        <input type="checkbox" required>
+                        <span>Согласен с <a href="#privacy" class="form__link">политикой конфиденциальности</a></span>
+                    </label>
+                </div>
+                <button type="submit" class="btn btn--primary btn--block">Отправить</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Cookie Popup -->
+    <div class="cookie-popup" id="cookiePopup">
+        <div class="cookie-popup__content">
+            <div class="cookie-popup__text">
+                <p class="cookie-popup__title">Мы используем cookies</p>
+                <p class="cookie-popup__description">Этот сайт использует cookies для улучшения работы сайта и вашего удобства. Продолжая использовать сайт, вы соглашаетесь с использованием cookies.</p>
+            </div>
+            <div class="cookie-popup__actions">
+                <button class="cookie-popup__btn cookie-popup__btn--accept" id="cookieAccept">Принять</button>
+                <button class="cookie-popup__btn cookie-popup__btn--reject" id="cookieReject">Отклонить</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
