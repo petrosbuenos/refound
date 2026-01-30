@@ -613,3 +613,4 @@ function init2GISMap() {
         console.error('Error initializing 2GIS map:', error);
     }
 }
+
