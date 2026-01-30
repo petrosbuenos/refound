@@ -66,11 +66,21 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // ============================================
-// IntersectionObserver для анімацій
+// IntersectionObserver для анімацій з реверсною анімацією
 // ============================================
 
 // Перевірка prefers-reduced-motion
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Відстеження напрямку прокрутки
+let lastScrollY = window.scrollY;
+let scrollDirection = 'down';
+
+window.addEventListener('scroll', () => {
+    const currentScrollY = window.scrollY;
+    scrollDirection = currentScrollY > lastScrollY ? 'down' : 'up';
+    lastScrollY = currentScrollY;
+}, { passive: true });
 
 const observerOptions = {
     threshold: 0.1,
@@ -80,7 +90,7 @@ const observerOptions = {
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
         if (entry.isIntersecting) {
-            // Для hero елементів додаємо затримку
+            // Елемент входить у viewport - показуємо його
             if (entry.target.classList.contains('hero__text')) {
                 setTimeout(() => {
                     entry.target.classList.add('visible');
@@ -92,9 +102,16 @@ const observer = new IntersectionObserver((entries) => {
             } else {
                 entry.target.classList.add('visible');
             }
-            // Прибираємо observer після появи для оптимізації
-            if (!prefersReducedMotion) {
-                observer.unobserve(entry.target);
+        } else {
+            // Елемент виходить з viewport - перевіряємо напрямок прокрутки
+            // Виключаємо hero елементи, щоб вони залишалися видимими
+            const isHeroElement = entry.target.classList.contains('hero__text') || 
+                                 entry.target.classList.contains('hero__form-wrapper') ||
+                                 entry.target.classList.contains('hero__image');
+            
+            if (scrollDirection === 'up' && entry.target.classList.contains('visible') && !isHeroElement) {
+                // При прокрутці вгору - приховуємо зі зворотною анімацією
+                entry.target.classList.remove('visible');
             }
         }
     });
