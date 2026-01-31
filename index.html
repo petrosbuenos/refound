@@ -83,13 +83,16 @@
                         <form class="form hero__form" id="heroForm">
                             <h3 class="form__title">Оставьте заявку</h3>
                             <div class="form__group">
-                                <input type="text" class="form__input" placeholder="Имя" required aria-label="Ваше имя">
+                                <input type="text" class="form__input" name="name" placeholder="Имя" required aria-label="Ваше имя">
                             </div>
                             <div class="form__group">
-                                <input type="tel" class="form__input" placeholder="Телефон" required aria-label="Ваш телефон">
+                                <input type="tel" class="form__input" name="phone" placeholder="Телефон" required aria-label="Ваш телефон">
                             </div>
                             <div class="form__group">
-                                <input type="email" class="form__input" placeholder="Email" required aria-label="Ваш email">
+                                <input type="email" class="form__input" name="email" placeholder="Email" aria-label="Ваш email">
+                            </div>
+                            <div class="form__group">
+                                <textarea class="form__input form__textarea" name="message" placeholder="Сообщение" rows="4" aria-label="Ваше сообщение"></textarea>
                             </div>
                             <div class="form__group">
                                 <p class="form__agreement">
@@ -673,13 +676,16 @@
             <h3 class="popup__title">Получите бесплатную консультацию</h3>
             <form class="form" id="popupForm">
                 <div class="form__group">
-                    <input type="text" class="form__input" placeholder="Имя" required aria-label="Ваше имя">
+                    <input type="text" class="form__input" name="name" placeholder="Имя" required aria-label="Ваше имя">
                 </div>
                 <div class="form__group">
-                    <input type="tel" class="form__input" placeholder="Телефон" required aria-label="Ваш телефон">
+                    <input type="tel" class="form__input" name="phone" placeholder="Телефон" required aria-label="Ваш телефон">
                 </div>
                 <div class="form__group">
-                    <input type="email" class="form__input" placeholder="Email" required aria-label="Ваш email">
+                    <input type="email" class="form__input" name="email" placeholder="Email" aria-label="Ваш email">
+                </div>
+                <div class="form__group">
+                    <textarea class="form__input form__textarea" name="message" placeholder="Сообщение" rows="4" aria-label="Ваше сообщение"></textarea>
                 </div>
                 <div class="form__group">
                     <p class="form__agreement">

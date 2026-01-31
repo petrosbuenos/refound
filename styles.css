@@ -683,18 +683,22 @@ body {
 }
 
 .form__input:focus,
-.form__input textarea:focus {
+.form__input textarea:focus,
+textarea.form__input:focus {
     outline: none;
     border-color: var(--color-gold);
     box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.15), 0 0 0 6px rgba(59, 130, 246, 0.1), var(--shadow-sm);
     background: linear-gradient(135deg, var(--color-surface) 0%, rgba(245, 158, 11, 0.02) 100%);
 }
 
-textarea.form__input {
+textarea.form__input,
+.form__textarea {
     resize: vertical;
     min-height: 100px;
     font-family: var(--font-family);
     line-height: var(--line-height-relaxed);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
 
 .form__input:invalid:not(:placeholder-shown) {
@@ -710,38 +714,33 @@ textarea.form__input {
 }
 
 .form__agreement .form__link {
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-gold-dark) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-decoration: none;
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
     font-weight: 500;
-    transition: opacity 0.3s ease;
+    transition: color 0.3s ease, text-decoration-color 0.3s ease;
+    text-decoration-color: var(--color-primary);
 }
 
 .form__agreement .form__link:hover {
-    opacity: 0.8;
-    text-decoration: underline;
-    -webkit-text-fill-color: var(--color-gold);
-    background: none;
+    color: var(--color-gold);
+    text-decoration-color: var(--color-gold);
+    text-decoration-thickness: 2px;
 }
 
 .form__link {
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-gold-dark) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-decoration: none;
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
     font-weight: 600;
-    transition: var(--transition-fast);
+    transition: color 0.3s ease, text-decoration-color 0.3s ease;
+    text-decoration-color: var(--color-primary);
 }
 
 .form__link:hover {
-    background: linear-gradient(135deg, var(--color-gold-dark) 0%, var(--color-gold) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-decoration: underline;
+    color: var(--color-gold);
+    text-decoration-color: var(--color-gold);
+    text-decoration-thickness: 2px;
 }
 
 /* ============================================
