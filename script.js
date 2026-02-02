@@ -4,36 +4,80 @@
 
 const burger = document.getElementById('burger');
 const nav = document.getElementById('nav');
+const navClose = document.getElementById('navClose');
 const navLinks = document.querySelectorAll('.nav__link');
 const header = document.querySelector('.header');
 const heroImage = document.getElementById('heroImage');
 const heroImageImg = document.getElementById('heroImageImg');
 
+// Функція для закриття меню
+function closeNavMenu() {
+    if (burger && nav) {
+        burger.classList.remove('active');
+        nav.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
+// Функція для відкриття меню
+function openNavMenu() {
+    if (burger && nav) {
+        burger.classList.add('active');
+        nav.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
 // Burger menu toggle
 if (burger && nav) {
-    burger.addEventListener('click', () => {
-        burger.classList.toggle('active');
-        nav.classList.toggle('active');
-        document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+    burger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (nav.classList.contains('active')) {
+            closeNavMenu();
+        } else {
+            openNavMenu();
+        }
     });
+
+    // Кнопка закриття в меню
+    if (navClose) {
+        navClose.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeNavMenu();
+        });
+    }
 
     // Close menu on link click
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
-            burger.classList.remove('active');
-            nav.classList.remove('active');
-            document.body.style.overflow = '';
+            // Невелика затримка для плавного переходу перед закриттям
+            setTimeout(() => {
+                closeNavMenu();
+            }, 100);
         });
     });
 
-    // Close menu on outside click
-    document.addEventListener('click', (e) => {
-        if (!nav.contains(e.target) && !burger.contains(e.target)) {
-            burger.classList.remove('active');
-            nav.classList.remove('active');
-            document.body.style.overflow = '';
+    // Close menu on overlay click
+    nav.addEventListener('click', (e) => {
+        if (e.target === nav || e.target.classList.contains('nav')) {
+            closeNavMenu();
         }
     });
+
+    // Close menu on ESC key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && nav.classList.contains('active')) {
+            closeNavMenu();
+        }
+    });
+
+    // Запобігаємо закриттю при кліку всередині меню
+    const navContent = nav.querySelector('.nav__list');
+    if (navContent) {
+        navContent.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    }
 }
 
 // ============================================
