@@ -75,6 +75,7 @@ if (burger && nav) {
     // Запобігаємо закриттю при кліку всередині меню (але не на посиланнях)
     const navHeader = nav.querySelector('.nav__header');
     const navContent = nav.querySelector('.nav__list');
+    const navFooter = nav.querySelector('.nav__footer');
     
     if (navHeader) {
         navHeader.addEventListener('click', (e) => {
@@ -88,6 +89,12 @@ if (burger && nav) {
             if (!e.target.classList.contains('nav__link')) {
                 e.stopPropagation();
             }
+        });
+    }
+    
+    if (navFooter) {
+        navFooter.addEventListener('click', (e) => {
+            e.stopPropagation();
         });
     }
 }
@@ -717,6 +724,19 @@ function scrollToContacts(e) {
 
 if (headerCta) {
     headerCta.addEventListener('click', scrollToContacts);
+}
+
+// Кнопка "Получить консультацию" в мобільному меню
+const navCta = document.getElementById('navCta');
+if (navCta) {
+    navCta.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        scrollToContacts(e);
+        setTimeout(() => {
+            closeNavMenu();
+        }, 100);
+    });
 }
 
 // ============================================
