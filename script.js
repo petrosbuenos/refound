@@ -497,16 +497,19 @@ faqQuestions.forEach(question => {
         const item = question.closest('.faq__item');
         const isExpanded = question.getAttribute('aria-expanded') === 'true';
         
-        // Закриваємо всі інші
+        // Закриваємо всі інші з плавною анімацією
         faqQuestions.forEach(q => {
             if (q !== question) {
-                q.setAttribute('aria-expanded', 'false');
-                q.closest('.faq__item').classList.remove('active');
+                const otherItem = q.closest('.faq__item');
+                if (otherItem.classList.contains('active')) {
+                    q.setAttribute('aria-expanded', 'false');
+                    otherItem.classList.remove('active');
+                }
             }
         });
         
         // Перемикаємо поточний
-        question.setAttribute('aria-expanded', !isExpanded);
+        question.setAttribute('aria-expanded', !isExpanded ? 'true' : 'false');
         item.classList.toggle('active', !isExpanded);
     });
     
