@@ -672,27 +672,79 @@ if (document.readyState === 'loading') {
 const heroForm = document.getElementById('heroForm');
 const contactsForm = document.getElementById('contactsForm');
 const forms = [heroForm, popupForm, contactsForm].filter(Boolean);
+const FORM_NOTICE_ID = 'formNotice';
+
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxBoismlL2vju4GaWJtLuDLmFkQtzdf9WO1cOtPMVqFmBkgXWG0joJaXRIMEEsetKpieA/exec';
+
+function showFormNotice(message, isError = false) {
+    let notice = document.getElementById(FORM_NOTICE_ID);
+    if (!notice) {
+        notice = document.createElement('div');
+        notice.id = FORM_NOTICE_ID;
+        notice.className = 'form-notice';
+        notice.setAttribute('role', 'status');
+        notice.setAttribute('aria-live', 'polite');
+        notice.innerHTML = '<span class="form-notice__text"></span>';
+        document.body.appendChild(notice);
+    }
+
+    const textEl = notice.querySelector('.form-notice__text');
+    if (textEl) {
+        textEl.textContent = message;
+    }
+
+    notice.classList.toggle('form-notice--error', isError);
+    notice.classList.add('form-notice--visible');
+
+    window.clearTimeout(notice._hideTimer);
+    notice._hideTimer = window.setTimeout(() => {
+        notice.classList.remove('form-notice--visible');
+    }, 3500);
+}
 
 forms.forEach(form => {
-    form?.addEventListener('submit', (e) => {
+    form?.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
-        // Тут можна додати відправку на сервер
+
         const formData = new FormData(form);
         const data = Object.fromEntries(formData);
-        
-        console.log('Form submitted:', data);
-        
-        // Показуємо повідомлення про успіх
-        alert('Спасибо! Мы свяжемся с вами в ближайшее время.');
-        
-        // Закриваємо попап якщо це форма в попапі
-        if (form === popupForm) {
-            closePopup();
+
+        let formSource = 'unknown';
+        if (form === heroForm) {
+            formSource = 'hero';
+        } else if (form === contactsForm) {
+            formSource = 'contacts';
+        } else if (form === popupForm) {
+            formSource = 'popup';
         }
-        
-        // Очищаємо форму
-        form.reset();
+
+        const payload = {
+            ...data,
+            formSource,
+            timestamp: new Date().toISOString(),
+        };
+
+        try {
+            await fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+            });
+
+            showFormNotice('Спасибо! Мы свяжемся с вами в ближайшее время.');
+
+            if (form === popupForm) {
+                closePopup();
+            }
+
+            form.reset();
+        } catch (error) {
+            console.error('Form submit error:', error);
+            showFormNotice('Ошибка отправки формы. Пожалуйста, попробуйте еще раз.', true);
+        }
     });
 });
 
