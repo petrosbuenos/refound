@@ -12,23 +12,18 @@
     <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
     
-    <!-- Preconnect для швидшого завантаження зовнішніх ресурсів -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://mapgl.2gis.com" crossorigin>
     
-    <!-- Preload критичних ресурсів -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" as="style">
     <link rel="preload" href="script.js" as="script">
     
-    <!-- Завантаження стилів -->
     <link rel="stylesheet" href="styles.css?v=1.1">
-    <!-- Google Fonts завантажується асинхронно -->
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
 </head>
 <body>
-    <!-- Шапка -->
     <header class="header" id="header">
         <div class="container">
             <div class="header__content">
@@ -70,9 +65,7 @@
         </div>
     </header>
 
-    <!-- Главная секция -->
     <main id="main">
-        <!-- Главное изображение на весь экран -->
         <div class="hero__image-fullscreen fade-in" id="heroImage">
             <img src="img/main.webp" alt="Опора Права" loading="eager" fetchpriority="high" id="heroImageImg">
         </div>
@@ -87,35 +80,25 @@
                         <div class="hero__trust fade-in">
                             <div class="trust-badge">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <!-- Перша монета -->
                                     <circle cx="7" cy="7" r="4"/>
-                                    <!-- Друга монета (трохи зсунута) -->
                                     <circle cx="13" cy="13" r="4"/>
-                                    <!-- Перекреслення -->
                                     <line x1="3" y1="3" x2="17" y2="17"/>
                                 </svg>
                                 <span>Без предоплаты</span>
                             </div>
                             <div class="trust-badge">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <!-- Ручка молотка -->
                                     <line x1="10" y1="4" x2="10" y2="16"/>
-                                    <!-- Голова молотка (горизонтальна частина) -->
                                     <rect x="6" y="4" width="8" height="3" rx="0.5"/>
-                                    <!-- Основа (дерево) -->
                                     <rect x="9" y="12" width="2" height="4" rx="0.5"/>
-                                    <!-- Додаткові деталі для кращого вигляду -->
                                     <line x1="7" y1="5.5" x2="13" y2="5.5"/>
                                 </svg>
                                 <span>Юридическое сопровождение</span>
                             </div>
                             <div class="trust-badge">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <!-- Основний документ -->
                                     <rect x="5" y="3" width="10" height="14" rx="1"/>
-                                    <!-- Загнутий куток -->
                                     <path d="M12 3v4h4"/>
-                                    <!-- Лінії тексту -->
                                     <line x1="7" y1="8" x2="13" y2="8"/>
                                     <line x1="7" y1="11" x2="13" y2="11"/>
                                     <line x1="7" y1="14" x2="11" y2="14"/>
@@ -130,24 +113,17 @@
                             </div>
                             <div class="trust-badge">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <!-- Голова -->
                                     <circle cx="10" cy="7" r="3"/>
-                                    <!-- Тіло -->
                                     <path d="M5 18c0-2.5 2.2-4.5 5-4.5s5 2 5 4.5"/>
                                 </svg>
                                 <span>Опытные специалисты</span>
                             </div>
                             <div class="trust-badge">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <!-- Верхня колба (вертикальний трикутник) -->
                                     <path d="M10 2 L7 6 L13 6 Z"/>
-                                    <!-- Центральна перетяжка -->
                                     <line x1="10" y1="6" x2="10" y2="14"/>
-                                    <!-- Нижня колба (вертикальний трикутник) -->
                                     <path d="M10 18 L7 14 L13 14 Z"/>
-                                    <!-- Пісок у верхній частині (мало піску) -->
                                     <line x1="8" y1="4" x2="12" y2="4"/>
-                                    <!-- Пісок у нижній частині (багато піску) -->
                                     <path d="M8 15 L10 17 L12 15" fill="none"/>
                                     <line x1="8.5" y1="16" x2="11.5" y2="16"/>
                                 </svg>
@@ -183,7 +159,6 @@
             </div>
         </section>
 
-        <!-- Преимущества -->
         <section class="advantages-section">
             <div class="container">
                 <div class="advantages">
@@ -203,23 +178,17 @@
             </div>
         </section>
 
-        <!-- Услуги -->
         <section class="services" id="services">
             <div class="container">
                 <h2 class="section__title fade-in">С какими кейсами работаем</h2>
                 <div class="services__grid">
                     <div class="service-card fade-in">
                         <div class="service-card__icon">
-                            <!-- Свічка -->
                             <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Тіло свічки -->
                                 <rect x="20" y="18" width="8" height="20" rx="1" stroke="currentColor" stroke-width="2" fill="none"/>
-                                <!-- Фітиль -->
                                 <line x1="24" y1="18" x2="24" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                                <!-- Полум'я -->
                                 <path d="M24 12 Q22 10, 22 8 Q22 6, 24 6 Q26 6, 26 8 Q26 10, 24 12" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
                                 <path d="M24 10 Q23 9, 23 8 Q23 7, 24 7 Q25 7, 25 8 Q25 9, 24 10" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                                <!-- Каплі воску -->
                                 <ellipse cx="20" cy="24" rx="1.5" ry="2" stroke="currentColor" stroke-width="1" fill="none"/>
                                 <ellipse cx="28" cy="28" rx="1.5" ry="2" stroke="currentColor" stroke-width="1" fill="none"/>
                                 <ellipse cx="21" cy="32" rx="1" ry="1.5" stroke="currentColor" stroke-width="1" fill="none"/>
@@ -230,11 +199,8 @@
                     </div>
                     <div class="service-card fade-in">
                         <div class="service-card__icon">
-                            <!-- Біржа з графіком що йде вгору -->
                             <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Графік з реалістичними коливаннями (спочатку вниз, потім вгору) -->
                                 <path d="M12 28 L16 30 L20 28 L24 32 L28 26 L32 22 L36 18 L40 14" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                                <!-- Точки на графіку -->
                                 <circle cx="12" cy="28" r="2" fill="currentColor"/>
                                 <circle cx="16" cy="30" r="2" fill="currentColor"/>
                                 <circle cx="20" cy="28" r="2" fill="currentColor"/>
@@ -243,12 +209,9 @@
                                 <circle cx="32" cy="22" r="2" fill="currentColor"/>
                                 <circle cx="36" cy="18" r="2" fill="currentColor"/>
                                 <circle cx="40" cy="14" r="2" fill="currentColor"/>
-                                <!-- Стрілка вгору -->
                                 <path d="M40 14 L40 10 M38 12 L40 10 L42 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <!-- Осі координат -->
                                 <line x1="12" y1="28" x2="12" y2="38" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
                                 <line x1="12" y1="38" x2="40" y2="38" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                                <!-- Підпис осей -->
                                 <line x1="10" y1="38" x2="14" y2="38" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
                                 <line x1="40" y1="36" x2="40" y2="40" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
                             </svg>
@@ -258,11 +221,8 @@
                     </div>
                     <div class="service-card fade-in">
                         <div class="service-card__icon">
-                            <!-- Два серця -->
                             <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Ліве серце -->
                                 <path d="M14 20 C14 16, 16 14, 18 14 C20 14, 22 16, 24 18 C26 16, 28 14, 30 14 C32 14, 34 16, 34 20 C34 24, 24 32, 24 32 C24 32, 14 24, 14 20 Z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                                <!-- Праве серце -->
                                 <path d="M18 24 C18 20, 20 18, 22 18 C24 18, 26 20, 28 22 C30 20, 32 18, 34 18 C36 18, 38 20, 38 24 C38 28, 28 36, 28 36 C28 36, 18 28, 18 24 Z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </div>
@@ -271,19 +231,13 @@
                     </div>
                     <div class="service-card fade-in">
                         <div class="service-card__icon">
-                            <!-- Будинок -->
                             <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Дах -->
                                 <path d="M8 24 L24 12 L40 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                                <!-- Стіни -->
                                 <rect x="14" y="24" width="20" height="18" rx="1" stroke="currentColor" stroke-width="2" fill="none"/>
-                                <!-- Двері -->
                                 <rect x="18" y="32" width="6" height="10" rx="0.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
                                 <circle cx="22" cy="37" r="0.8" fill="currentColor"/>
-                                <!-- Вікна -->
                                 <rect x="26" y="28" width="4" height="4" rx="0.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
                                 <rect x="32" y="28" width="4" height="4" rx="0.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                                <!-- Хрест на даху -->
                                 <line x1="24" y1="12" x2="24" y2="8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                                 <line x1="20" y1="10" x2="28" y2="10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                             </svg>
@@ -293,21 +247,15 @@
                     </div>
                     <div class="service-card fade-in">
                         <div class="service-card__icon">
-                            <!-- Документна картка (паспорт/віза) -->
                             <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Основний документ -->
                                 <rect x="12" y="14" width="24" height="30" rx="1.5" stroke="currentColor" stroke-width="2" fill="none"/>
-                                <!-- Загнутий куток -->
                                 <path d="M30 14 L36 14 L36 20" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                                <!-- Лінії тексту -->
                                 <line x1="16" y1="20" x2="28" y2="20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
                                 <line x1="16" y1="24" x2="26" y2="24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
                                 <line x1="16" y1="28" x2="24" y2="28" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                                <!-- Фото/емблема -->
                                 <rect x="16" y="32" width="8" height="10" rx="0.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
                                 <circle cx="20" cy="36" r="2" stroke="currentColor" stroke-width="1" fill="none"/>
                                 <path d="M16 40 L24 40" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
-                                <!-- Печатка/штамп -->
                                 <circle cx="30" cy="36" r="3" stroke="currentColor" stroke-width="1.5" fill="none"/>
                                 <path d="M30 33 L30 36 L32 38" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
                             </svg>
@@ -317,22 +265,14 @@
                     </div>
                     <div class="service-card fade-in">
                         <div class="service-card__icon">
-                            <!-- Будівельний кран -->
                             <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Основа крана -->
                                 <rect x="8" y="36" width="32" height="4" rx="0.5" stroke="currentColor" stroke-width="2" fill="none"/>
-                                <!-- Вертикальна колона -->
                                 <rect x="22" y="20" width="4" height="16" rx="0.5" stroke="currentColor" stroke-width="2" fill="none"/>
-                                <!-- Горизонтальна стріла -->
                                 <rect x="26" y="22" width="18" height="3" rx="0.5" stroke="currentColor" stroke-width="2" fill="none"/>
-                                <!-- Трос з вантажем -->
                                 <line x1="40" y1="23.5" x2="40" y2="30" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                                <!-- Вантаж -->
                                 <rect x="36" y="30" width="8" height="6" rx="0.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                                <!-- Опорні троси -->
                                 <line x1="26" y1="23.5" x2="20" y2="28" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
                                 <line x1="26" y1="23.5" x2="20" y2="20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                                <!-- Кабіна оператора -->
                                 <rect x="20" y="16" width="6" height="4" rx="0.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
                                 <circle cx="23" cy="18" r="0.8" fill="currentColor"/>
                             </svg>
@@ -344,7 +284,6 @@
             </div>
         </section>
 
-        <!-- Команда -->
         <section class="team" id="team">
             <div class="container">
                 <h2 class="section__title fade-in">Наша команда</h2>
@@ -385,7 +324,6 @@
             </div>
         </section>
 
-        <!-- Этапы возврата -->
         <section class="stages" id="stages">
             <div class="container">
                 <h2 class="section__title fade-in">Этапы возврата</h2>
@@ -443,7 +381,6 @@
             </div>
         </section>
 
-        <!-- Отзывы -->
         <section class="reviews" id="reviews">
             <div class="container">
                 <h2 class="section__title fade-in">Отзывы клиентов</h2>
@@ -531,7 +468,6 @@
             </div>
         </section>
 
-        <!-- FAQ -->
         <section class="faq" id="faq">
             <div class="container">
                 <h2 class="section__title fade-in">Часто задаваемые вопросы</h2>
@@ -660,7 +596,6 @@
             </div>
         </section>
 
-        <!-- Контакты -->
         <section class="contacts" id="contacts">
             <div class="container">
                 <h2 class="section__title fade-in">Контакты</h2>
@@ -745,7 +680,6 @@
         </section>
     </main>
 
-    <!-- Подвал -->
     <footer class="footer">
         <div class="container">
             <div class="footer__content">
@@ -789,9 +723,6 @@
         </div>
     </footer>
 
-    <!-- Floating чат bubble з випадаючим меню -->
-    <!-- Модалка видео -->
-    <!-- Попап форма -->
     <div class="popup" id="popup">
         <div class="popup__overlay"></div>
         <div class="popup__content">
@@ -824,7 +755,6 @@
         </div>
     </div>
 
-    <!-- Cookie Popup -->
     <div class="cookie-popup" id="cookiePopup">
         <div class="cookie-popup__content">
             <div class="cookie-popup__text">
@@ -838,11 +768,8 @@
         </div>
     </div>
 
-    <!-- Script.js завантажується з defer для неблокуючого виконання -->
     <script src="script.js" defer></script>
-    <!-- Jivo чат -->
     <script src="https://code.jivo.ru/widget/tLQUwEPG1t" async></script>
-    <!-- 2GIS Map завантажується асинхронно після завантаження сторінки -->
     <script src="https://mapgl.2gis.com/api/js/v1" defer></script>
 </body>
 </html>
