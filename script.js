@@ -581,6 +581,161 @@ const FORM_NOTICE_ID = 'formNotice';
 
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxBoismlL2vju4GaWJtLuDLmFkQtzdf9WO1cOtPMVqFmBkgXWG0joJaXRIMEEsetKpieA/exec';
 
+// Валідація полів форми
+const validators = {
+    name: (value) => {
+        if (!value || value.trim().length === 0) {
+            return 'Поле "Имя" обязательно для заполнения';
+        }
+        if (value.trim().length < 2) {
+            return 'Имя должно содержать минимум 2 символа';
+        }
+        if (value.trim().length > 50) {
+            return 'Имя не должно превышать 50 символов';
+        }
+        if (!/^[а-яА-ЯёЁa-zA-Z\s\-']+$/u.test(value.trim())) {
+            return 'Имя может содержать только буквы, пробелы, дефисы и апострофы';
+        }
+        return '';
+    },
+    phone: (value) => {
+        if (!value || value.trim().length === 0) {
+            return 'Поле "Телефон" обязательно для заполнения';
+        }
+        // Видаляємо всі нецифрові символи для перевірки
+        const digitsOnly = value.replace(/\D/g, '');
+        if (digitsOnly.length < 10) {
+            return 'Телефон должен содержать минимум 10 цифр';
+        }
+        if (digitsOnly.length > 15) {
+            return 'Телефон не должен превышать 15 цифр';
+        }
+        // Перевірка формату (може починатися з +, містити дужки, пробіли, дефіси)
+        if (!/^[\+]?[(]?[0-9]{1,4}[)]?[-\s\.]?[(]?[0-9]{1,4}[)]?[-\s\.]?[0-9]{1,9}[-\s\.]?[0-9]{1,9}$/im.test(value.trim())) {
+            return 'Введите корректный номер телефона';
+        }
+        return '';
+    },
+    email: (value) => {
+        if (!value || value.trim().length === 0) {
+            return ''; // Email не обов'язкове поле
+        }
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value.trim())) {
+            return 'Введите корректный email адрес';
+        }
+        if (value.trim().length > 100) {
+            return 'Email не должен превышать 100 символов';
+        }
+        return '';
+    },
+    message: (value) => {
+        if (!value || value.trim().length === 0) {
+            return ''; // Повідомлення не обов'язкове поле
+        }
+        if (value.trim().length > 1000) {
+            return 'Сообщение не должно превышать 1000 символов';
+        }
+        return '';
+    }
+};
+
+// Функція для відображення помилки
+function showFieldError(input, errorMessage) {
+    const formGroup = input.closest('.form__group');
+    if (!formGroup) return;
+    
+    const form = input.closest('form');
+    const formId = form?.id || 'form';
+    const fieldName = input.name;
+    
+    // Перевіряємо чи вже є елемент помилки (може бути в HTML)
+    let errorElement = formGroup.querySelector('.form__error');
+    if (!errorElement) {
+        errorElement = document.createElement('span');
+        errorElement.className = 'form__error';
+        errorElement.setAttribute('role', 'alert');
+        errorElement.setAttribute('aria-live', 'polite');
+        errorElement.id = `${formId}-${fieldName}-error`;
+        formGroup.appendChild(errorElement);
+    }
+    
+    // Оновлюємо aria-describedby на input
+    const errorId = errorElement.id;
+    if (errorId && !input.getAttribute('aria-describedby')) {
+        input.setAttribute('aria-describedby', errorId);
+    }
+    
+    errorElement.textContent = errorMessage;
+    input.setAttribute('aria-invalid', errorMessage ? 'true' : 'false');
+    
+    if (errorMessage) {
+        input.classList.add('form__input--error');
+        input.classList.remove('form__input--valid');
+    } else {
+        input.classList.remove('form__input--error');
+        if (input.value.trim().length > 0) {
+            input.classList.add('form__input--valid');
+        }
+    }
+}
+
+// Функція для валідації поля
+function validateField(input) {
+    const fieldName = input.name;
+    const validator = validators[fieldName];
+    
+    if (!validator) return true;
+    
+    const errorMessage = validator(input.value);
+    showFieldError(input, errorMessage);
+    
+    return !errorMessage;
+}
+
+// Функція для валідації всієї форми
+function validateForm(form) {
+    const inputs = form.querySelectorAll('input[name], textarea[name]');
+    let isValid = true;
+    
+    inputs.forEach(input => {
+        if (!validateField(input)) {
+            isValid = false;
+        }
+    });
+    
+    return isValid;
+}
+
+// Додаємо валідацію в реальному часі
+forms.forEach(form => {
+    if (!form) return;
+    
+    const inputs = form.querySelectorAll('input[name], textarea[name]');
+    inputs.forEach(input => {
+        // Валідація при втраті фокусу
+        input.addEventListener('blur', () => {
+            validateField(input);
+        });
+        
+        // Валідація при введенні (з затримкою для кращого UX)
+        let timeout;
+        input.addEventListener('input', () => {
+            clearTimeout(timeout);
+            // Видаляємо клас помилки під час введення
+            if (input.classList.contains('form__input--error')) {
+                const formGroup = input.closest('.form__group');
+                const errorElement = formGroup?.querySelector('.form__error');
+                if (errorElement && errorElement.textContent) {
+                    timeout = setTimeout(() => {
+                        validateField(input);
+                    }, 500);
+                }
+            }
+        });
+    });
+});
+
 function showFormNotice(message, isError = false) {
     let notice = document.getElementById(FORM_NOTICE_ID);
     if (!notice) {
@@ -611,6 +766,18 @@ forms.forEach(form => {
     form?.addEventListener('submit', async (e) => {
         e.preventDefault();
 
+        // Валідація форми перед відправкою
+        if (!validateForm(form)) {
+            // Знаходимо перше поле з помилкою та фокусуємо на ньому
+            const firstError = form.querySelector('.form__input--error');
+            if (firstError) {
+                firstError.focus();
+                firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            showFormNotice('Пожалуйста, исправьте ошибки в форме', true);
+            return;
+        }
+
         const formData = new FormData(form);
         const data = Object.fromEntries(formData);
 
@@ -629,6 +796,14 @@ forms.forEach(form => {
             timestamp: new Date().toISOString(),
         };
 
+        // Блокуємо кнопку відправки
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton?.textContent;
+        if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.textContent = 'Отправка...';
+        }
+
         try {
             await fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
@@ -645,10 +820,25 @@ forms.forEach(form => {
                 closePopup();
             }
 
+            // Очищаємо всі помилки та класи валідації
+            form.querySelectorAll('.form__input').forEach(input => {
+                input.classList.remove('form__input--error', 'form__input--valid');
+                input.setAttribute('aria-invalid', 'false');
+            });
+            form.querySelectorAll('.form__error').forEach(error => {
+                error.textContent = '';
+            });
+
             form.reset();
         } catch (error) {
             console.error('Form submit error:', error);
             showFormNotice('Ошибка отправки формы. Пожалуйста, попробуйте еще раз.', true);
+        } finally {
+            // Розблоковуємо кнопку відправки
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.textContent = originalButtonText || 'Отправить';
+            }
         }
     });
 });
