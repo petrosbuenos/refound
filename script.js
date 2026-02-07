@@ -677,9 +677,10 @@ function resetTurnstile(form) {
     }
     
     // Прибираємо помилку капчі
-    const errorElement = turnstileContainer.parentElement?.querySelector('.turnstile-error');
+    const formGroup = turnstileContainer.closest('.form__group');
+    const errorElement = formGroup?.querySelector('.turnstile-error');
     if (errorElement) {
-        errorElement.remove();
+        errorElement.textContent = '';
     }
 }
 
@@ -691,24 +692,18 @@ function showTurnstileError(form, message) {
     const formGroup = turnstileContainer.closest('.form__group');
     if (!formGroup) return;
     
-    // Видаляємо стару помилку, якщо є
-    const existingError = formGroup.querySelector('.turnstile-error');
-    if (existingError) {
-        existingError.remove();
+    // Знаходимо або створюємо елемент помилки
+    let errorElement = formGroup.querySelector('.turnstile-error');
+    if (!errorElement) {
+        errorElement = document.createElement('span');
+        errorElement.className = 'turnstile-error form__error';
+        errorElement.setAttribute('role', 'alert');
+        errorElement.setAttribute('aria-live', 'polite');
+        formGroup.appendChild(errorElement);
     }
     
-    // Створюємо нову помилку
-    const errorElement = document.createElement('span');
-    errorElement.className = 'turnstile-error form__error';
+    // Показуємо помилку
     errorElement.textContent = message;
-    errorElement.setAttribute('role', 'alert');
-    errorElement.setAttribute('aria-live', 'polite');
-    
-    // Вставляємо після контейнера капчі
-    turnstileContainer.parentElement.insertBefore(errorElement, turnstileContainer.nextSibling);
-    
-    // Прокручуємо до капчі
-    turnstileContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 // Валідація полів форми
@@ -918,7 +913,7 @@ forms.forEach(form => {
         // Прибираємо помилку капчі, якщо вона була
         const turnstileError = form.querySelector('.turnstile-error');
         if (turnstileError) {
-            turnstileError.remove();
+            turnstileError.textContent = '';
         }
 
         const formData = new FormData(form);
@@ -976,7 +971,7 @@ forms.forEach(form => {
             // Прибираємо помилку капчі
             const turnstileError = form.querySelector('.turnstile-error');
             if (turnstileError) {
-                turnstileError.remove();
+                turnstileError.textContent = '';
             }
 
             form.reset();

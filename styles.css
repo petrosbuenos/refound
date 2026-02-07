@@ -247,4 +247,7 @@
 .cf-turnstile { margin: var(--spacing-md) 0; display: flex; justify-content: center; min-height: 65px; align-items: center; font-size: var(--font-size-xs); color: var(--color-text-muted); text-align: center; }
 .cf-turnstile--error { color: #b91c1c; }
 .form__group .cf-turnstile { margin-bottom: var(--spacing-md); }
-.turnstile-error { display: block; margin-top: var(--spacing-xs); text-align: center; }
+.turnstile-error { margin-top: var(--spacing-xs); text-align: center; min-height: 1.5em; display: block; line-height: 1.5em; color: transparent; transition: color 0.2s ease; }
+.turnstile-error:not(:empty) { color: #dc2626; }
+.form__group--turnstile { padding-bottom: calc(1.5em + var(--spacing-xs)); position: relative; }
+.form__group--turnstile .turnstile-error { position: absolute; bottom: 0; left: 0; right: 0; margin-top: 0; }
