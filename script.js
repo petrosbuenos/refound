@@ -582,7 +582,69 @@ const FORM_NOTICE_ID = 'formNotice';
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxBoismlL2vju4GaWJtLuDLmFkQtzdf9WO1cOtPMVqFmBkgXWG0joJaXRIMEEsetKpieA/exec';
 
 // Cloudflare Turnstile Site Key (замініть на свій ключ)
-const TURNSTILE_SITE_KEY = '0x4AAAAAACYpewbuwIzI6YHjKgvoI1I7P2A';
+const TURNSTILE_SITE_KEY = '0x4AAAAAACYpe5iZG3zFKbyk';
+
+function renderTurnstileWidgets() {
+    if (!window.turnstile) return;
+
+    document.querySelectorAll('.cf-turnstile').forEach((element) => {
+        // Перевірка, чи вже зарендерено (має iframe або data-widget-id)
+        if (element.getAttribute('data-widget-id') || element.querySelector('iframe')) {
+            return;
+        }
+
+        const sitekey = element.getAttribute('data-sitekey') || TURNSTILE_SITE_KEY;
+        if (!sitekey) return;
+
+        const theme = element.getAttribute('data-theme') || 'light';
+        const size = element.getAttribute('data-size') || 'normal';
+        const appearance = element.getAttribute('data-appearance') || 'always';
+
+        try {
+            const widgetId = window.turnstile.render(element, {
+                sitekey,
+                theme,
+                size,
+                appearance,
+            });
+            element.setAttribute('data-widget-id', widgetId);
+        } catch (error) {
+            console.error('Turnstile render error:', error);
+        }
+    });
+}
+
+function initTurnstile() {
+    if (window.turnstile) {
+        renderTurnstileWidgets();
+        return;
+    }
+
+    let attempts = 0;
+    const maxAttempts = 15;
+    const intervalId = setInterval(() => {
+        attempts += 1;
+        if (window.turnstile) {
+            clearInterval(intervalId);
+            renderTurnstileWidgets();
+        } else if (attempts >= maxAttempts) {
+            clearInterval(intervalId);
+            console.warn('Turnstile script did not load');
+            document.querySelectorAll('.cf-turnstile').forEach((element) => {
+                if (!element.textContent) {
+                    element.textContent = 'Капча не завантажилась. Оновіть сторінку.';
+                }
+                element.classList.add('cf-turnstile--error');
+            });
+        }
+    }, 300);
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTurnstile);
+} else {
+    initTurnstile();
+}
 
 // Функція для отримання токену капчі з форми
 function getTurnstileToken(form) {
@@ -613,6 +675,40 @@ function resetTurnstile(form) {
             console.error('Turnstile reset error:', error);
         }
     }
+    
+    // Прибираємо помилку капчі
+    const errorElement = turnstileContainer.parentElement?.querySelector('.turnstile-error');
+    if (errorElement) {
+        errorElement.remove();
+    }
+}
+
+// Функція для відображення помилки капчі на формі
+function showTurnstileError(form, message) {
+    const turnstileContainer = form.querySelector('.cf-turnstile');
+    if (!turnstileContainer) return;
+    
+    const formGroup = turnstileContainer.closest('.form__group');
+    if (!formGroup) return;
+    
+    // Видаляємо стару помилку, якщо є
+    const existingError = formGroup.querySelector('.turnstile-error');
+    if (existingError) {
+        existingError.remove();
+    }
+    
+    // Створюємо нову помилку
+    const errorElement = document.createElement('span');
+    errorElement.className = 'turnstile-error form__error';
+    errorElement.textContent = message;
+    errorElement.setAttribute('role', 'alert');
+    errorElement.setAttribute('aria-live', 'polite');
+    
+    // Вставляємо після контейнера капчі
+    turnstileContainer.parentElement.insertBefore(errorElement, turnstileContainer.nextSibling);
+    
+    // Прокручуємо до капчі
+    turnstileContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 // Валідація полів форми
@@ -815,12 +911,14 @@ forms.forEach(form => {
         // Перевірка капчі перед відправкою
         const turnstileToken = getTurnstileToken(form);
         if (!turnstileToken) {
-            showFormNotice('Пожалуйста, подтвердите, что вы не робот', true);
-            const turnstileContainer = form.querySelector('.cf-turnstile');
-            if (turnstileContainer) {
-                turnstileContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
+            showTurnstileError(form, 'Пожалуйста, подтвердите, что вы не робот');
             return;
+        }
+        
+        // Прибираємо помилку капчі, якщо вона була
+        const turnstileError = form.querySelector('.turnstile-error');
+        if (turnstileError) {
+            turnstileError.remove();
         }
 
         const formData = new FormData(form);
@@ -874,6 +972,12 @@ forms.forEach(form => {
             form.querySelectorAll('.form__error').forEach(error => {
                 error.textContent = '';
             });
+            
+            // Прибираємо помилку капчі
+            const turnstileError = form.querySelector('.turnstile-error');
+            if (turnstileError) {
+                turnstileError.remove();
+            }
 
             form.reset();
             
