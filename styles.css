@@ -224,6 +224,14 @@
   .contacts__form{padding:var(--spacing-sm)}
   .map-container--compact{height:180px;min-height:180px}
 }
+
+/* intl-tel-input overrides */
+.iti{width:100%}
+.iti .form__input{padding-left:3.25rem}
+.iti--separate-dial-code .form__input{padding-left:5.25rem}
+.iti__selected-flag{padding:0 0.75rem;border-right:1px solid var(--color-border-light)}
+.iti__selected-flag:focus-visible{outline:2px solid var(--color-primary);outline-offset:2px}
+.iti__country-list{z-index:3001}
 .footer__messengers{margin-top:var(--spacing-md);padding:var(--spacing-md);background:rgba(255,255,255,0.08);border-radius:var(--radius-lg);border:1px solid rgba(255,255,255,0.15);box-shadow:0 2px 8px rgba(15,23,42,0.15);backdrop-filter:blur(4px)}
 .footer__messengers-title{font-size:var(--font-size-xs);text-transform:uppercase;letter-spacing:var(--letter-spacing-wide);color:rgba(255,255,255,0.85);margin-bottom:var(--spacing-sm);font-weight:600}
 .footer__messengers-list{display:flex;gap:var(--spacing-sm);flex-wrap:wrap}

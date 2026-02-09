@@ -578,6 +578,8 @@ const heroForm = document.getElementById('heroForm');
 const contactsForm = document.getElementById('contactsForm');
 const forms = [heroForm, popupForm, contactsForm].filter(Boolean);
 const FORM_NOTICE_ID = 'formNotice';
+const phoneInputs = document.querySelectorAll('input[name="phone"]');
+const phoneInstances = new Map();
 
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxBoismlL2vju4GaWJtLuDLmFkQtzdf9WO1cOtPMVqFmBkgXWG0joJaXRIMEEsetKpieA/exec';
 const GCLID_STORAGE_KEY = 'refound_gclid';
@@ -653,6 +655,27 @@ function ensureHiddenInput(form, name, value) {
     input.value = value;
 }
 
+function initPhoneInputs() {
+    if (phoneInputs.length === 0 || typeof window.intlTelInput !== 'function') {
+        return;
+    }
+
+    phoneInputs.forEach((input) => {
+        if (input.dataset.itiInitialized) return;
+
+        const instance = window.intlTelInput(input, {
+            initialCountry: 'ru',
+            separateDialCode: true,
+            nationalMode: true,
+            autoPlaceholder: 'polite',
+            utilsScript: 'https://cdn.jsdelivr.net/npm/intl-tel-input@latest/build/js/utils.js',
+        });
+
+        phoneInstances.set(input, instance);
+        input.dataset.itiInitialized = 'true';
+    });
+}
+
 function renderTurnstileWidgets() {
     if (!window.turnstile) return;
 
@@ -713,6 +736,12 @@ if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initTurnstile);
 } else {
     initTurnstile();
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPhoneInputs);
+} else {
+    initPhoneInputs();
 }
 
 // Функція для отримання токену капчі з форми
@@ -881,7 +910,20 @@ function validateField(input) {
     
     if (!validator) return true;
     
-    const errorMessage = validator(input.value);
+    let valueToValidate = input.value;
+    if (fieldName === 'phone') {
+        const phoneInstance = phoneInstances.get(input);
+        const fullNumber = phoneInstance?.getNumber();
+        if (fullNumber) {
+            valueToValidate = fullNumber;
+        } else if (phoneInstance) {
+            const dialCode = phoneInstance.getSelectedCountryData()?.dialCode || '';
+            const digitsOnly = input.value.replace(/\D/g, '');
+            valueToValidate = dialCode ? `+${dialCode}${digitsOnly}` : digitsOnly;
+        }
+    }
+
+    const errorMessage = validator(valueToValidate);
     showFieldError(input, errorMessage);
     
     return !errorMessage;
@@ -1008,6 +1050,19 @@ forms.forEach(form => {
 
         const gclidValue = getGclidFromUrl();
         ensureHiddenInput(form, 'gclid', gclidValue);
+
+        const phoneInput = form.querySelector('input[name="phone"]');
+        if (phoneInput) {
+            const phoneInstance = phoneInstances.get(phoneInput);
+            const fullNumber = phoneInstance?.getNumber();
+            if (fullNumber) {
+                phoneInput.value = fullNumber;
+            } else if (phoneInstance) {
+                const dialCode = phoneInstance.getSelectedCountryData()?.dialCode || '';
+                const digitsOnly = phoneInput.value.replace(/\D/g, '');
+                phoneInput.value = dialCode ? `+${dialCode}${digitsOnly}` : digitsOnly;
+            }
+        }
 
         const formData = new FormData(form);
         const data = Object.fromEntries(formData);
