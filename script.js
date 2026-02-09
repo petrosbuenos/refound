@@ -1019,6 +1019,18 @@ forms.forEach(form => {
             trackingPayload[payloadKey] = getUrlParamCaseInsensitive(paramName);
         });
 
+        if (!trackingPayload['Conversion Name']) {
+            trackingPayload['Conversion Name'] = 'Lead_Opora_Prava';
+        }
+
+        if (!trackingPayload['Conversion Value']) {
+            trackingPayload['Conversion Value'] = '100';
+        }
+
+        if (!trackingPayload['Conversion Currency']) {
+            trackingPayload['Conversion Currency'] = 'USD';
+        }
+
         let formSource = 'unknown';
         if (form === heroForm) {
             formSource = 'hero';
