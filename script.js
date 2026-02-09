@@ -966,6 +966,11 @@ function showFormNotice(message, isError = false) {
     notice.classList.toggle('form-notice--error', isError);
     notice.classList.add('form-notice--visible');
 
+    if (!isError) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: 'form_submit_success' });
+    }
+
     window.clearTimeout(notice._hideTimer);
     notice._hideTimer = window.setTimeout(() => {
         notice.classList.remove('form-notice--visible');
