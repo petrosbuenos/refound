@@ -580,6 +580,7 @@ const forms = [heroForm, popupForm, contactsForm].filter(Boolean);
 const FORM_NOTICE_ID = 'formNotice';
 
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxBoismlL2vju4GaWJtLuDLmFkQtzdf9WO1cOtPMVqFmBkgXWG0joJaXRIMEEsetKpieA/exec';
+const GCLID_STORAGE_KEY = 'refound_gclid';
 
 // Cloudflare Turnstile Site Key (замініть на свій ключ)
 const TURNSTILE_SITE_KEY = '0x4AAAAAACYpe5iZG3zFKbyk';
@@ -599,7 +600,12 @@ function getUrlParamCaseInsensitive(paramName) {
 }
 
 function getGclidFromUrl() {
-    return getUrlParamCaseInsensitive('gclid');
+    const urlGclid = getUrlParamCaseInsensitive('gclid');
+    if (urlGclid) {
+        localStorage.setItem(GCLID_STORAGE_KEY, urlGclid);
+        return urlGclid;
+    }
+    return localStorage.getItem(GCLID_STORAGE_KEY) || '';
 }
 
 function pad2(value) {
@@ -970,6 +976,7 @@ forms.forEach(form => {
         const gclidValue = getGclidFromUrl();
         const conversionTime = getConversionTimeString();
         ensureHiddenInput(form, 'GCLID', gclidValue);
+        ensureHiddenInput(form, 'gclid', gclidValue);
         ensureHiddenInput(form, 'conversion_time', conversionTime);
 
         const formData = new FormData(form);
@@ -990,6 +997,7 @@ forms.forEach(form => {
             timestamp: new Date().toISOString(),
             turnstileToken: turnstileToken,
             GCLID: gclidValue,
+            gclid: gclidValue,
             conversion_time: conversionTime,
             'Conversion Name': FIXED_CONVERSION_NAME,
             'Conversion Value': FIXED_CONVERSION_VALUE,
