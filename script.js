@@ -1008,11 +1008,6 @@ function showFormNotice(message, isError = false) {
     notice.classList.toggle('form-notice--error', isError);
     notice.classList.add('form-notice--visible');
 
-    if (!isError) {
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({ event: 'form_submit_success' });
-    }
-
     window.clearTimeout(notice._hideTimer);
     notice._hideTimer = window.setTimeout(() => {
         notice.classList.remove('form-notice--visible');
@@ -1125,6 +1120,16 @@ forms.forEach(form => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(payload),
+            });
+
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                event: 'form_submit_success',
+                form_source: formSource,
+                gclid: gclidValue,
+                conversion_name: trackingPayload['Conversion Name'],
+                conversion_value: trackingPayload['Conversion Value'],
+                conversion_currency: trackingPayload['Conversion Currency'],
             });
 
             showFormNotice('Спасибо! Мы свяжемся с вами в ближайшее время.');
