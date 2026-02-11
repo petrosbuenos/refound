@@ -486,7 +486,7 @@ const popup = document.getElementById('popup');
 const popupClose = document.getElementById('popupClose');
 const popupForm = document.getElementById('popupForm');
 
-const POPUP_STORAGE_KEY = 'refound_popup_shown';
+const POPUP_STORAGE_KEY = 'oporaprava_yr_popup_shown';
 const POPUP_DELAY = 30000;
 const POPUP_COOLDOWN = 24 * 60 * 60 * 1000;
 
@@ -530,7 +530,7 @@ const cookiePopup = document.getElementById('cookiePopup');
 const cookieAccept = document.getElementById('cookieAccept');
 const cookieReject = document.getElementById('cookieReject');
 
-const COOKIE_CONSENT_KEY = 'refound_cookie_consent';
+const COOKIE_CONSENT_KEY = 'oporaprava_yr_cookie_consent';
 
 function hasCookieConsent() {
     return localStorage.getItem(COOKIE_CONSENT_KEY) !== null;
@@ -582,7 +582,7 @@ const phoneInputs = document.querySelectorAll('input[name="phone"]');
 const phoneInstances = new Map();
 
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxBoismlL2vju4GaWJtLuDLmFkQtzdf9WO1cOtPMVqFmBkgXWG0joJaXRIMEEsetKpieA/exec';
-const GCLID_STORAGE_KEY = 'refound_gclid';
+const GCLID_STORAGE_KEY = 'oporaprava_yr_gclid';
 
 // Cloudflare Turnstile Site Key (замініть на свій ключ)
 const TURNSTILE_SITE_KEY = '0x4AAAAAACYpe5iZG3zFKbyk';
@@ -1075,7 +1075,7 @@ forms.forEach(form => {
         });
 
         if (!trackingPayload['Conversion Name']) {
-            trackingPayload['Conversion Name'] = 'Lead_Opora_Prava';
+            trackingPayload['Conversion Name'] = 'Lead_Opora_Prava_YR';
         }
 
         if (!trackingPayload['Conversion Value']) {
