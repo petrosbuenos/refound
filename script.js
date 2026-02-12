@@ -657,7 +657,6 @@ const phoneInputs = document.querySelectorAll('input[name="phone"]');
 const phoneInstances = new Map();
 
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxBoismlL2vju4GaWJtLuDLmFkQtzdf9WO1cOtPMVqFmBkgXWG0joJaXRIMEEsetKpieA/exec';
-const GCLID_STORAGE_KEY = 'oporaprava_yr_gclid';
 
 // Cloudflare Turnstile Site Key (замініть на свій ключ)
 const TURNSTILE_SITE_KEY = '0x4AAAAAACaqyi_RS1Uxp8_i';
@@ -688,15 +687,6 @@ function getUrlParamCaseInsensitive(paramName) {
     return '';
 }
 
-function getGclidFromUrl() {
-    const urlGclid = getUrlParamCaseInsensitive('gclid');
-    if (urlGclid) {
-        localStorage.setItem(GCLID_STORAGE_KEY, urlGclid);
-        return urlGclid;
-    }
-    return localStorage.getItem(GCLID_STORAGE_KEY) || '';
-}
-
 function pad2(value) {
     return String(value).padStart(2, '0');
 }
@@ -717,17 +707,6 @@ function getConversionTimeString() {
     const gtmPlusOneMs = utcMs + 60 * 60000;
     const withExtraTwoMinutes = gtmPlusOneMs + 2 * 60000;
     return formatDateTime(new Date(withExtraTwoMinutes));
-}
-
-function ensureHiddenInput(form, name, value) {
-    let input = form.querySelector(`input[name="${name}"]`);
-    if (!input) {
-        input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = name;
-        form.appendChild(input);
-    }
-    input.value = value;
 }
 
 function initPhoneInputs() {
@@ -1118,9 +1097,6 @@ forms.forEach(form => {
             turnstileError.textContent = '';
         }
 
-        const gclidValue = getGclidFromUrl();
-        ensureHiddenInput(form, 'gclid', gclidValue);
-
         const phoneInput = form.querySelector('input[name="phone"]');
         if (phoneInput) {
             const phoneInstance = phoneInstances.get(phoneInput);
@@ -1137,9 +1113,7 @@ forms.forEach(form => {
         const formData = new FormData(form);
         const data = Object.fromEntries(formData);
 
-        const trackingPayload = {
-            'Google Click ID': gclidValue,
-        };
+        const trackingPayload = {};
 
         TRACKING_PARAMS.forEach((param) => {
             trackingPayload[param] = getUrlParamCaseInsensitive(param);
@@ -1175,7 +1149,6 @@ forms.forEach(form => {
             formSource,
             timestamp: new Date().toISOString(),
             turnstileToken: turnstileToken,
-            gclid: gclidValue,
             ...trackingPayload,
         };
 
@@ -1195,16 +1168,6 @@ forms.forEach(form => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(payload),
-            });
-
-            window.dataLayer = window.dataLayer || [];
-            window.dataLayer.push({
-                event: 'form_submit_success',
-                form_source: formSource,
-                gclid: gclidValue,
-                conversion_name: trackingPayload['Conversion Name'],
-                conversion_value: trackingPayload['Conversion Value'],
-                conversion_currency: trackingPayload['Conversion Currency'],
             });
 
             showFormNotice('Благодарим! Мы свяжемся с вами в ближайшее время.');
