@@ -1,4 +1,15 @@
 # ============================================
+# Clean URLs для секцій головної сторінки
+# ============================================
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(uslugi|komanda|etapy-vozvrata|otzyvy|faq|kontakty|glavnaya)/?$ index.html [L]
+</IfModule>
+
+# ============================================
 # Налаштування кешування для статичних ресурсів
 # ============================================
 
