@@ -906,6 +906,12 @@ const validators = {
         }
         return '';
     },
+    lossAmount: (value) => {
+        if (!value || value.trim().length === 0) {
+            return 'Выберите, пожалуйста, сумму потери';
+        }
+        return '';
+    },
     message: (value) => {
         if (!value || value.trim().length === 0) {
             return ''; // Повідомлення не обов'язкове поле
@@ -985,7 +991,7 @@ function validateField(input) {
 
 // Функція для валідації всієї форми
 function validateForm(form) {
-    const inputs = form.querySelectorAll('input[name], textarea[name]');
+    const inputs = form.querySelectorAll('input[name], textarea[name], select[name]');
     let isValid = true;
     
     inputs.forEach(input => {
@@ -1001,7 +1007,7 @@ function validateForm(form) {
 forms.forEach(form => {
     if (!form) return;
     
-    const inputs = form.querySelectorAll('input[name], textarea[name]');
+    const inputs = form.querySelectorAll('input[name], textarea[name], select[name]');
     inputs.forEach(input => {
         // Валідація при втраті фокусу
         input.addEventListener('blur', () => {
@@ -1023,6 +1029,12 @@ forms.forEach(form => {
                 }
             }
         });
+
+        if (input.tagName === 'SELECT') {
+            input.addEventListener('change', () => {
+                validateField(input);
+            });
+        }
     });
 });
 
@@ -1068,7 +1080,30 @@ function showFormNotice(message, isError = false) {
     }, 3500);
 }
 
-forms.forEach(form => {
+function setupSubmitButtonPressedState(form) {
+    const submitButton = form?.querySelector('button[type="submit"]');
+    if (!submitButton) return;
+
+    const addPressed = () => {
+        if (!submitButton.classList.contains('btn--loading')) {
+            submitButton.classList.add('btn--pressed');
+        }
+    };
+
+    const removePressed = () => {
+        submitButton.classList.remove('btn--pressed');
+    };
+
+    submitButton.addEventListener('mousedown', addPressed);
+    submitButton.addEventListener('mouseup', removePressed);
+    submitButton.addEventListener('mouseleave', removePressed);
+    submitButton.addEventListener('touchstart', addPressed, { passive: true });
+    submitButton.addEventListener('touchend', removePressed, { passive: true });
+    submitButton.addEventListener('touchcancel', removePressed, { passive: true });
+}
+
+forms.forEach((form) => {
+    setupSubmitButtonPressedState(form);
     form?.addEventListener('submit', async (e) => {
         e.preventDefault();
 
@@ -1160,6 +1195,7 @@ forms.forEach(form => {
         // Блокуємо кнопку та показуємо стан завантаження
         const originalButtonText = submitButton?.textContent?.trim() || 'Отправить';
         if (submitButton) {
+            submitButton.classList.remove('btn--pressed');
             submitButton.disabled = true;
             submitButton.setAttribute('aria-busy', 'true');
             submitButton.classList.add('btn--loading');
@@ -1207,6 +1243,7 @@ forms.forEach(form => {
         } finally {
             // Розблоковуємо кнопку та скидаємо стан завантаження
             if (submitButton) {
+                submitButton.classList.remove('btn--pressed');
                 submitButton.disabled = false;
                 submitButton.setAttribute('aria-busy', 'false');
                 submitButton.classList.remove('btn--loading');
