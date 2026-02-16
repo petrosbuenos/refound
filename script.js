@@ -1072,6 +1072,11 @@ forms.forEach(form => {
     form?.addEventListener('submit', async (e) => {
         e.preventDefault();
 
+        const submitButton = form.querySelector('button[type="submit"]');
+        if (submitButton?.classList.contains('btn--loading')) {
+            return;
+        }
+
         // Валідація форми перед відправкою
         if (!validateForm(form)) {
             // Знаходимо перше поле з помилкою та фокусуємо на ньому
@@ -1152,11 +1157,12 @@ forms.forEach(form => {
             ...trackingPayload,
         };
 
-        // Блокуємо кнопку відправки
-        const submitButton = form.querySelector('button[type="submit"]');
-        const originalButtonText = submitButton?.textContent;
+        // Блокуємо кнопку та показуємо стан завантаження
+        const originalButtonText = submitButton?.textContent?.trim() || 'Отправить';
         if (submitButton) {
             submitButton.disabled = true;
+            submitButton.setAttribute('aria-busy', 'true');
+            submitButton.classList.add('btn--loading');
             submitButton.textContent = 'Отправляем...';
         }
 
@@ -1199,10 +1205,12 @@ forms.forEach(form => {
             console.error('Form submit error:', error);
             showFormNotice('Ошибка при отправке. Попробуйте, пожалуйста, ещё раз.', true);
         } finally {
-            // Розблоковуємо кнопку відправки
+            // Розблоковуємо кнопку та скидаємо стан завантаження
             if (submitButton) {
                 submitButton.disabled = false;
-                submitButton.textContent = originalButtonText || 'Отправить';
+                submitButton.setAttribute('aria-busy', 'false');
+                submitButton.classList.remove('btn--loading');
+                submitButton.textContent = originalButtonText;
             }
         }
     });
